@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | MedConnect</title>
+
+  <style>
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    :root{
+      --bg:#07111f; --card:#101c2c; --primary:#3b82f6;
+      --primary-hover:#2563eb; --text:#f8fafc; --muted:#94a3b8;
+      --border:rgba(255,255,255,0.08); --shadow:0 12px 30px rgba(0,0,0,0.35);
+      --radius:20px;
+    }
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(to bottom,#07111f,#0d1726);
+      color:var(--text);
+      line-height:1.6;
+    }
+    .container{ width:90%; max-width:1200px; margin:auto; }
+    section{ padding:60px 0; }
+    h1,h2,h3{ margin-bottom:15px; }
+    .btn{
+      background:var(--primary); color:white; border:none;
+      padding:14px 24px; border-radius:14px; font-weight:bold;
+      cursor:pointer; transition:0.3s; text-decoration:none;
+      display:inline-block; box-shadow:0 0 20px rgba(59,130,246,0.3);
+    }
+    .btn:hover{ background:var(--primary-hover); transform:translateY(-2px); }
+    
+    .navbar{
+      background:rgba(7,17,31,0.95); backdrop-filter:blur(10px);
+      padding:20px 0; position:sticky; top:0; z-index:1000;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-container{
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:20px;
+    }
+    .logo{ font-size:1.8rem; font-weight:bold; }
+    .logo span{ color:var(--primary); }
+    .nav-links{ display:flex; gap:30px; align-items:center; flex-wrap:wrap; }
+    .nav-links a{ color:var(--text); text-decoration:none; transition:0.3s; }
+    .nav-links a:hover{ color:var(--primary); }
+
+    .checkout-grid{
+      display:grid;
+      grid-template-columns:1fr 0.8fr;
+      gap:40px;
+    }
+    .form-card, .order-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:35px;
+      box-shadow:var(--shadow);
+    }
+    .form-group{ margin-bottom:20px; }
+    input, select{
+      width:100%;
+      background:#0f1b2d;
+      border:1px solid var(--border);
+      color:white;
+      padding:14px;
+      border-radius:14px;
+      font-size:1rem;
+    }
+    .row-2{ display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    hr{ border-color:var(--border); margin:20px 0; }
+    .order-item{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:15px;
+    }
+    .total-price{
+      font-size:1.4rem;
+      font-weight:bold;
+      color:var(--primary);
+    }
+    footer{
+      background:#050b14; padding:40px 0; text-align:center;
+      border-top:1px solid var(--border); margin-top:50px;
+    }
+    @media(max-width:800px){
+      .checkout-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">Med<span>Connect</span></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="checkout.html" style="color:var(--primary);">Checkout</a>
+        <a href="index.html#booking">Consult</a>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="container">
+      <h1>Checkout</h1>
+      <p>Complete your order and we'll ship directly to you</p>
+
+      <div class="checkout-grid">
+        <div class="form-card">
+          <h3>Shipping Information</h3>
+          <form id="checkoutForm">
+            <div class="form-group">
+              <input type="text" placeholder="Full Name" id="fullName" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Email Address" id="email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Street Address" id="address" required>
+            </div>
+            <div class="row-2">
+              <input type="text" placeholder="City" id="city" required>
+              <input type="text" placeholder="ZIP Code" id="zip" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" placeholder="Phone Number" id="phone" required>
+            </div>
+            <hr>
+            <h3>Payment Information</h3>
+            <div class="form-group">
+              <input type="text" placeholder="Card Number (demo)" id="cardNum">
+            </div>
+            <div class="row-2">
+              <input type="text" placeholder="MM/YY" id="expiry">
+              <input type="text" placeholder="CVC" id="cvc">
+            </div>
+            <button type="submit" class="btn">Place Order</button>
+          </form>
+        </div>
+
+        <div class="order-card">
+          <h3>Order Summary</h3>
+          <div id="orderItems"></div>
+          <hr>
+          <div style="display:flex; justify-content:space-between;">
+            <strong>Total:</strong>
+            <span class="total-price">$<span id="checkoutTotal">0.00</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <h3>MedConnect</h3>
+      <p>© 2025 | Secure telehealth checkout</p>
+    </div>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderOrderSummary(){
+      const container = document.getElementById("orderItems");
+      const totalSpan = document.getElementById("checkoutTotal");
+      if(!container) return;
+      if(cart.length === 0){
+        container.innerHTML = "<p style='color:gray;'>Your cart is empty. <a href='products.html' style='color:#3b82f6;'>Shop now</a></p>";
+        totalSpan.textContent = "0.00";
+        return;
+      }
+      let total = 0;
+      container.innerHTML = cart.map(item => {
+        total += item.price * item.quantity;
+        return `<div class="order-item">
+          <span>${item.name} x${item.quantity}</span>
+          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>`;
+      }).join('');
+      totalSpan.textContent = total.toFixed(2);
+    }
+
+    document.getElementById("checkoutForm")?.addEventListener("submit", function(e){
+      e.preventDefault();
+      if(cart.length === 0){
+        alert("Your cart is empty. Add products before checking out.");
+        return;
+      }
+      alert("✅ Order placed successfully!\n\nThank you for choosing MedConnect.\nYour telehealth products will ship within 2-3 days.");
+      localStorage.removeItem('cart');
+      cart = [];
+      renderOrderSummary();
+      this.reset();
+    });
+
+    renderOrderSummary();
+  </script>
+</body>
+</html>
