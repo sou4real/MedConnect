@@ -1,176 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Research Peptides Catalog | 102 High-Purity Peptides | Quanyutong</title>
-  <meta name="description" content="Browse our complete catalog of 102 research-grade peptides: Semaglutide, Tirzepatide, BPC-157, GHK-Cu and more. All ≥99.5% purity, lyophilized, global shipping.">
-  <meta name="keywords" content="peptide catalog, research peptides, semaglutide, tirzepatide, bpc-157, ghk-cu, high purity peptides, custom peptides">
-  <link rel="canonical" href="https://quanyutong.sbs/catalog">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products | LifeMD</title>
+
   <style>
-    h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Inter', sans-serif; }
-    body { font-family: 'Roboto', sans-serif; }
-    .bg-primary { background-color: #165DFF; }
-    .text-primary { color: #165DFF; }
-    .border-primary { border-color: #165DFF; }
-    .bg-accent { background-color: #8B5CF6; }
-    .text-accent { color: #8B5CF6; }
-    .sticky-nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); }
-    .bg-grid { background-image: linear-gradient(rgba(22,93,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(22,93,255,0.02) 1px, transparent 1px); background-size: 30px 30px; }
-    .btn-hover-scale { transition: transform 0.15s; }
-    .btn-hover-scale:hover { transform: scale(1.02); }
-    .catalog-row { transition: background 0.15s; }
-    .catalog-row:hover { background-color: #F0F9FF; }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#07111f;
+      --card:#101c2c;
+      --card-light:#16263a;
+      --primary:#3b82f6;
+      --primary-hover:#2563eb;
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --border:rgba(255,255,255,0.08);
+      --shadow:0 12px 30px rgba(0,0,0,0.35);
+      --radius:20px;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(to bottom,#07111f,#0d1726);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .container{
+      width:90%;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    section{
+      padding:90px 0;
+    }
+
+    h1,h2,h3{
+      margin-bottom:15px;
+    }
+
+    p{
+      color:var(--muted);
+    }
+
+    .btn{
+      background:var(--primary);
+      color:white;
+      border:none;
+      padding:14px 24px;
+      border-radius:14px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      text-decoration:none;
+      display:inline-block;
+      box-shadow:0 0 20px rgba(59,130,246,0.3);
+    }
+
+    .btn:hover{
+      background:var(--primary-hover);
+      transform:translateY(-2px);
+    }
+
+    .btn-outline{
+      background:transparent;
+      border:1px solid var(--primary);
+      box-shadow:none;
+    }
+
+    .btn-outline:hover{
+      background:var(--primary);
+    }
+
+    /* NAVIGATION */
+    .navbar{
+      background:rgba(7,17,31,0.95);
+      backdrop-filter:blur(10px);
+      padding:20px 0;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:20px;
+    }
+
+    .logo{
+      font-size:1.8rem;
+      font-weight:bold;
+    }
+
+    .logo span{
+      color:var(--primary);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:var(--text);
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:var(--primary);
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:2.4rem;
+    }
+
+    /* PRODUCTS GRID */
+    .products-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .product-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      overflow:hidden;
+      transition:0.3s;
+      box-shadow:var(--shadow);
+    }
+
+    .product-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .product-image{
+      height:220px;
+      background:#0a1220;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .product-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .product-content{
+      padding:25px;
+    }
+
+    .price{
+      color:#60a5fa;
+      font-size:1.3rem;
+      font-weight:bold;
+      margin:15px 0;
+    }
+
+    .old-price{
+      color:var(--muted);
+      font-size:0.9rem;
+      text-decoration:line-through;
+      margin-left:10px;
+    }
+
+    .badge{
+      display:inline-block;
+      background:#22c55e;
+      font-size:0.7rem;
+      padding:4px 10px;
+      border-radius:20px;
+      margin-bottom:10px;
+    }
+
+    /* CART */
+    .cart{
+      position:fixed;
+      top:90px;
+      right:20px;
+      width:340px;
+      background:rgba(16,28,44,0.98);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:25px;
+      z-index:999;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      max-height:80vh;
+      overflow-y:auto;
+    }
+
+    .cart h3{
+      margin-bottom:20px;
+    }
+
+    .cart-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+      gap:10px;
+    }
+
+    .cart-controls{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .qty-btn{
+      width:28px;
+      height:28px;
+      border:none;
+      border-radius:8px;
+      background:var(--primary);
+      color:white;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    .total{
+      margin-top:20px;
+      font-size:1.2rem;
+      font-weight:bold;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#050b14;
+      padding:50px 0;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.06);
+      margin-top:50px;
+    }
+
+    @media(max-width:900px){
+      .cart{
+        position:relative;
+        width:100%;
+        right:auto;
+        top:auto;
+        margin:20px auto;
+        max-height:none;
+      }
+      .nav-container{
+        flex-direction:column;
+      }
+    }
   </style>
 </head>
-<body class="bg-[#F8FAFC] text-gray-700 bg-grid">
+<body>
 
-<nav class="sticky-nav shadow-sm">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <a href="index.html" class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-          <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" fill="white" /><path d="M14 12L18 18L14 24L18 30M26 10L22 16L26 22L22 28" stroke="#165DFF" stroke-width="2"/></svg>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">Life<span>MD</span></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html" style="color:var(--primary);">Products</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="index.html#booking">Consult</a>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>All Products</h2>
+        <p>Browse our wellness essentials recommended by telehealth professionals</p>
+      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <div class="cart">
+    <h3>🛒 Order Summary</h3>
+    <div id="cart-items"></div>
+    <div class="total">Total: $<span id="cart-total">0.00</span></div>
+    <a href="checkout.html" class="btn" style="width:100%; margin-top:20px; text-align:center;">Proceed to Checkout</a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <h3>LifeMD</h3>
+      <p>Email: support@lifemd.com</p>
+      <p>Disclaimer: Not for emergencies. Call 911 for urgent care.</p>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { id:1, name:"Immune Support Vitamins", price:24.99, category:"Vitamins", badge:"Best Seller", image:"images/vitamins.jpg" },
+      { id:2, name:"Blood Pressure Monitor", price:59.99, category:"Devices", badge:"Doctor Recommended", image:"images/bpmonitor.jpg" },
+      { id:3, name:"Sleep Wellness Gummies", price:18.50, category:"Supplements", badge:"New", image:"images/gummies.jpg" },
+      { id:4, name:"Digital Thermometer", price:22.99, category:"Devices", image:"images/thermometer.jpg" },
+      { id:5, name:"Stress Relief Tea", price:14.99, category:"Wellness", badge:"Organic", image:"images/tea.jpg" },
+      { id:6, name:"Pulse Oximeter", price:29.99, category:"Devices", badge:"Essential", image:"images/pulseox.jpg" },
+      { id:7, name:"Tirzepatide 30mg/3mL", price:199.99, category:"Prescription", badge:"Rx Required", image:"images/tirzepatide.jpg" }
+      { id:7, name:"Tirzepatide 20mg/4mL", price:99.99, category:"Prescription", badge:"Rx Required", image:"images/tirzepatide.jpg" }
+      { id:7, name:"Tirzepatide 40mg/4mL", price:299.99, category:"Prescription", badge:"Rx Required", image:"images/tirzepatide.jpg" }  
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart(){
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function addToCart(name, price){
+      const existing = cart.find(item => item.name === name);
+      if(existing){
+        existing.quantity++;
+      } else {
+        cart.push({ name, price, quantity:1 });
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function changeQty(name, amount){
+      const item = cart.find(item => item.name === name);
+      if(!item) return;
+      item.quantity += amount;
+      if(item.quantity <= 0){
+        cart = cart.filter(i => i.name !== name);
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart(){
+      const cartItems = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
+      if(!cartItems) return;
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <div><strong>${item.name}</strong><br>$${item.price.toFixed(2)}</div>
+          <div class="cart-controls">
+            <button class="qty-btn" onclick="changeQty('${item.name}',-1)">-</button>
+            <span>${item.quantity}</span>
+            <button class="qty-btn" onclick="changeQty('${item.name}',1)">+</button>
+          </div>
+        `;
+        cartItems.appendChild(div);
+      });
+      cartTotal.textContent = total.toFixed(2);
+    }
+
+    function renderProducts(){
+      const grid = document.getElementById("productsGrid");
+      if(!grid) return;
+      grid.innerHTML = products.map(p => `
+        <div class="product-card">
+          <div class="product-image">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://placehold.co/300x220?text=Image+Not+Found'">
+          </div>
+          <div class="product-content">
+            ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}
+            <h3>${p.name}</h3>
+            <p>${p.category}</p>
+            <div class="price">$${p.price.toFixed(2)}</div>
+            <button class="btn" onclick="addToCart('${p.name}',${p.price})">Add to Order</button>
+          </div>
         </div>
-        <div><span class="text-xl font-bold text-primary">Quanyutong</span><span class="text-xs text-gray-500 block -mt-0.5">Research Peptides</span></div>
-      </a>
-      <div class="hidden lg:flex items-center space-x-6 font-heading text-sm font-medium">
-        <a href="catalog.html" class="text-accent font-semibold" data-i18n="nav_products">Products</a>
-        <a href="custom-synthesis.html" class="text-gray-700 hover:text-accent transition" data-i18n="nav_custom">Custom Synthesis</a>
-        <a href="technology.html" class="text-gray-700 hover:text-accent transition" data-i18n="nav_technology">Technology</a>
-        <a href="about.html" class="text-gray-700 hover:text-accent transition" data-i18n="nav_about">About</a>
-        <a href="index.html#faq" class="text-gray-700 hover:text-accent transition" data-i18n="nav_faq">FAQ</a>
-        <a href="contact.html" class="text-gray-700 hover:text-accent transition" data-i18n="nav_contact">Contact</a>
-      </div>
-      <div class="hidden lg:flex items-center space-x-3">
-        <select id="langSwitcherDesktop" class="text-sm border-gray-200 rounded-lg py-1.5 bg-white"><option value="en">English</option><option value="zh">中文</option><option value="ar">العربية</option></select>
-        <a href="contact.html" class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-accent transition btn-hover-scale" data-i18n="request_quote">Request A Quote</a>
-      </div>
-      <div class="flex items-center space-x-2 lg:hidden">
-        <select id="langSwitcherMobile" class="text-xs border-gray-200 rounded-lg py-1 bg-white w-20"><option value="en">EN</option><option value="zh">中文</option><option value="ar">عربي</option></select>
-        <button id="mobileMenuBtn" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-      </div>
-    </div>
-    <div id="mobileMenu" class="lg:hidden hidden flex-col bg-white/95 backdrop-blur px-5 pb-4 space-y-2 border-t">
-      <a href="catalog.html" class="block py-2 px-3 rounded-lg hover:bg-gray-100 text-accent font-medium" data-i18n="nav_products">Products</a>
-      <a href="custom-synthesis.html" class="block py-2 px-3 rounded-lg hover:bg-gray-100 text-gray-700" data-i18n="nav_custom">Custom Synthesis</a>
-      <a href="technology.html" class="block py-2 px-3 rounded-lg hover:bg-gray-100 text-gray-700" data-i18n="nav_technology">Technology</a>
-      <a href="about.html" class="block py-2 px-3 rounded-lg hover:bg-gray-100 text-gray-700" data-i18n="nav_about">About</a>
-      <a href="index.html#faq" class="block py-2 px-3 rounded-lg hover:bg-gray-100 text-gray-700" data-i18n="nav_faq">FAQ</a>
-      <a href="contact.html" class="block py-2 px-3 rounded-lg hover:bg-gray-100 text-gray-700" data-i18n="nav_contact">Contact</a>
-      <div class="pt-3">
-        <select id="langSwitcherMobileMenu" class="w-full text-sm border border-gray-300 rounded-lg py-2 bg-white">
-          <option value="en">English</option><option value="zh">中文</option><option value="ar">العربية</option>
-        </select>
-      </div>
-      <div class="pt-3"><a href="contact.html" class="block w-full bg-primary text-white text-center py-2.5 rounded-full text-sm font-semibold" data-i18n="request_quote">Request A Quote</a></div>
-    </div>
-  </div>
-</nav>
+      `).join('');
+    }
 
-<section class="bg-primary text-white py-12">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 text-center">
-    <h1 class="text-4xl lg:text-5xl font-bold mb-3" data-i18n="catalog_heading">Complete Peptide Catalog</h1>
-    <p class="text-lg text-white/80 max-w-3xl mx-auto" data-i18n="catalog_subheading">102 research-grade peptides — all with ≥99.5% purity, lyophilized, and ready to ship worldwide.</p>
-  </div>
-</section>
-
-<section class="py-6 bg-white border-b border-gray-200">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="flex flex-wrap items-center justify-between gap-4">
-      <div class="flex flex-wrap gap-2">
-        <button data-filter="all" class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-primary text-white">All (102)</button>
-        <button data-filter="weight" class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-gray-300 text-gray-600 hover:bg-primary hover:text-white transition">Weight Management</button>
-        <button data-filter="regenerative" class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-gray-300 text-gray-600 hover:bg-primary hover:text-white transition">Regenerative</button>
-        <button data-filter="antiaging" class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-gray-300 text-gray-600 hover:bg-primary hover:text-white transition">Anti-Aging</button>
-        <button data-filter="research" class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-gray-300 text-gray-600 hover:bg-primary hover:text-white transition">Research Tools</button>
-      </div>
-      <div class="relative">
-        <input type="text" id="searchInput" placeholder="Search peptide..." class="w-64 px-4 py-2 pl-10 border border-gray-300 rounded-full text-sm focus:ring-2 focus:ring-accent/50 focus:border-accent">
-        <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-10">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50"><tr><th class="px-6 py-4 text-left text-xs font-semibold text-primary uppercase tracking-wider" data-i18n="th_product">Product</th><th class="px-6 py-4 text-left text-xs font-semibold text-primary uppercase tracking-wider" data-i18n="th_mechanism">Mechanism & Effects</th><th class="px-6 py-4 text-left text-xs font-semibold text-primary uppercase tracking-wider" data-i18n="th_purity">Purity</th><th class="px-6 py-4 text-left text-xs font-semibold text-primary uppercase tracking-wider" data-i18n="th_category">Category</th></tr></thead>
-          <tbody id="catalogBody" class="divide-y divide-gray-100"></tbody>
-        </table>
-      </div>
-    </div>
-    <p class="text-center text-sm text-gray-500 mt-6" data-i18n="disclaimer">All products are for research use only. Custom synthesis and bulk orders available upon request.</p>
-  </div>
-</section>
-
-<footer class="bg-primary text-white/80 py-12">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="grid md:grid-cols-4 gap-8">
-      <div><div class="flex items-center space-x-2 mb-3"><div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-primary font-bold">Q</div><span class="text-white font-bold text-lg">Quanyutong</span></div><p class="text-sm text-white/60" data-i18n="footer_about">Professional peptide supplier since 2014. HPLC verified, discreet USA shipping.</p></div>
-      <div><h4 class="text-white font-semibold mb-3" data-i18n="footer_links">Quick Links</h4><ul class="space-y-2 text-sm text-white/70"><li><a href="catalog.html" class="hover:text-white" data-i18n="nav_products">Products</a></li><li><a href="custom-synthesis.html" class="hover:text-white" data-i18n="nav_custom">Custom Synthesis</a></li><li><a href="technology.html" class="hover:text-white" data-i18n="nav_technology">Technology</a></li><li><a href="about.html" class="hover:text-white" data-i18n="nav_about">About</a></li></ul></div>
-      <div><h4 class="text-white font-semibold mb-3" data-i18n="footer_categories">Categories</h4><ul class="space-y-2 text-sm text-white/70"><li><a href="#">Weight Management</a></li><li><a href="#">Regenerative</a></li><li><a href="#">Anti-Aging</a></li><li><a href="#">Research Tools</a></li></ul></div>
-      <div><h4 class="text-white font-semibold mb-3" data-i18n="footer_contact">Contact</h4><ul class="text-sm text-white/70"><li>📧 wfqytls@qq.com</li><li>📞 WA: +86 13256460679</li></ul></div>
-    </div>
-    <div class="border-t border-white/20 mt-8 pt-6 text-xs text-white/50 flex flex-wrap justify-between"><span>© 2026 Quanyutong. All rights reserved.</span><div class="flex gap-4"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
-  </div>
-</footer>
-
-<script>
-  const productNames = ["Semaglutide","Tirzepatide","Retatrutide","BPC-157","TB-500 (Thymosin B4 Acetate)","BPC 5mg + TB 5mg","BPC10mg+TB10mg","BPC 10mg+GHK-Cu50mg+Tb500 10mg","CJC-1295 NO DAC 5mg+IPA5mg","CJC 1295 (without DAC)","GHK-Cu","DSIP","Epitalon","FOXO4","FST 344","FTPP Adipotide","Frag 17-23","HGH Fragment 176-191","HGH 191AA (Somatropin)","Hexarelin Acetate","Ipamorelin","IGF-1 LR3","CU50+TB10+BC10+KPV10","Glutathione","MT1","MOTS-c","NAD+","Oxytocin","Selank","SLU-PP-322","Survodutide","Tesamorelin","Thymosin Alpha-1","Thymalin","VIP","SS-31","5-amino-1mq","Lemon Bottle","Sermorelin Acetate","Semax","Triptorelin Acetate","AOD9604","ARA290 (Cibinetide)","Adipotide/FTTP","Adamax","AHK-Cu","Aicar","ACE 031","ACTH 1-39","CJC1295 with DAC","Cagrisema (2.5mg+2.5mg)","Cagrilintide","Cardiogen","Cortagen","Crystagen","HCG","Humanin","HMG","MGF","Mazdutide","Melanotan II","Matrixyl","GHRP-2","GHRP-6","Gonadorelin Acetate","GDF-8","L-carnitine","LL37","PNC-27","Pinealon","PE-22-28","P21 (P021)","PEG MGF","PT141","Orexin B","Orexin A","B7-33","Acetic Acid water 0.6%","Bac. water","Dulaglutide","Demorphin","KPV","EPO","Retatrutide 20mg + Tirzepatide 40mg (10ml)","Kisspeptin-10","Snap8"];
-  const descMapEN = { "Semaglutide":"Long-acting GLP-1 agonist; stimulates insulin, delays gastric emptying.","Tirzepatide":"Dual GIP/GLP-1 agonist; superior weight loss.","Retatrutide":"Triple agonist (GCGR/GIP/GLP-1); increases energy expenditure.","BPC-157":"Accelerates healing of tendons, ligaments, GI tract.","TB-500 (Thymosin B4 Acetate)":"Actin-binding peptide; promotes cell migration and wound repair.","GHK-Cu":"Copper tripeptide; collagen synthesis, antioxidant.","DSIP":"Delta sleep-inducing peptide; modulates sleep patterns.","Epitalon":"Telomerase activator; regulates pineal function.","MOTS-c":"Mitochondrial-derived; regulates metabolic flexibility.","SS-31":"Mitochondria-targeted; binds cardiolipin, reduces ROS.","AOD9604":"hGH fragment; stimulates lipolysis without glucose effects.","Ipamorelin":"Selective GHS-R agonist; clean GH secretagogue." };
-  const defaultDescEN = "Research peptide with specific biological activity. ≥99.5% purity.";
-  const descMapZH = { "Semaglutide":"长效GLP-1激动剂；刺激胰岛素，延缓胃排空。","Tirzepatide":"GIP/GLP-1双激动剂；显著减重。","Retatrutide":"三重激动剂；增加能量消耗。","BPC-157":"加速肌腱、韧带、胃肠道愈合。","TB-500 (Thymosin B4 Acetate)":"肌动蛋白结合肽；促进细胞迁移和伤口修复。","GHK-Cu":"铜三肽；促进胶原合成，抗氧化。","DSIP":"δ睡眠诱导肽；调节睡眠。","Epitalon":"端粒酶激活剂；调节松果体功能。","MOTS-c":"线粒体衍生；调节代谢灵活性。","SS-31":"靶向线粒体；结合心磷脂，减少ROS。","AOD9604":"hGH片段；刺激脂肪分解。","Ipamorelin":"选择性GHS-R激动剂；纯净GH促分泌剂。" };
-  const defaultDescZH = "研究用多肽，具有特定生物活性。纯度≥99.5%。";
-  const descMapAR = { "Semaglutide":"ناهض GLP-1 طويل المفعول؛ يحفز الأنسولين ويؤخر إفراغ المعدة.","Tirzepatide":"ناهض مزدوج GIP/GLP-1؛ فقدان وزن فائق.","Retatrutide":"ناهض ثلاثي؛ يزيد إنفاق الطاقة.","BPC-157":"يسرع شفاء الأوتار والأربطة والجهاز الهضمي.","TB-500 (Thymosin B4 Acetate)":"ببتيد رابط للأكتين؛ يعزز هجرة الخلايا وإصلاح الجروح.","GHK-Cu":"ثلاثي ببتيد نحاسي؛ تخليق الكولاجين ومضاد أكسدة.","DSIP":"ببتيد محفز لنوم الدلتا؛ يعدل أنماط النوم.","Epitalon":"منشط التيلوميراز؛ ينظم وظيفة الغدة الصنوبرية." };
-  const defaultDescAR = "ببتيد بحثي ذو نشاط بيولوجي محدد. نقاء ≥99.5%.";
-  const categoryMap = { "Semaglutide":"weight","Tirzepatide":"weight","Retatrutide":"weight","BPC-157":"regenerative","TB-500 (Thymosin B4 Acetate)":"regenerative","GHK-Cu":"regenerative","DSIP":"research","Epitalon":"antiaging","MOTS-c":"research","SS-31":"research","AOD9604":"weight","Ipamorelin":"research" };
-  function getCategory(name) { return categoryMap[name] || "research"; }
-  let currentFilter = "all", currentSearch = "", currentLang = "en";
-
-  function renderTable() {
-    const tbody = document.getElementById('catalogBody');
-    const filtered = productNames.filter(name => { const cat = getCategory(name); const matchFilter = currentFilter === 'all' || cat === currentFilter; const matchSearch = name.toLowerCase().includes(currentSearch.toLowerCase()); return matchFilter && matchSearch; });
-    tbody.innerHTML = '';
-    filtered.forEach(name => {
-      const tr = document.createElement('tr'); tr.className = 'catalog-row cursor-pointer';
-      tr.addEventListener('click', () => { window.location.href = `product.html?name=${encodeURIComponent(name)}`; });
-      const tdName = document.createElement('td'); tdName.className = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-primary'; tdName.textContent = name;
-      const tdDesc = document.createElement('td'); tdDesc.className = 'px-6 py-4 text-sm text-gray-600';
-      let desc = ''; if (currentLang === 'zh') desc = descMapZH[name] || defaultDescZH; else if (currentLang === 'ar') desc = descMapAR[name] || defaultDescAR; else desc = descMapEN[name] || defaultDescEN;
-      tdDesc.textContent = desc;
-      const tdPurity = document.createElement('td'); tdPurity.className = 'px-6 py-4 whitespace-nowrap text-sm text-accent font-semibold'; tdPurity.textContent = '≥99.5%';
-      const tdCat = document.createElement('td'); tdCat.className = 'px-6 py-4 whitespace-nowrap text-xs';
-      const cat = getCategory(name); let catLabel = cat === 'weight' ? 'Weight' : cat === 'regenerative' ? 'Regenerative' : cat === 'antiaging' ? 'Anti-Aging' : 'Research';
-      if (currentLang === 'zh') catLabel = cat === 'weight' ? '体重管理' : cat === 'regenerative' ? '再生修复' : cat === 'antiaging' ? '抗衰老' : '科研工具';
-      else if (currentLang === 'ar') catLabel = cat === 'weight' ? 'إدارة الوزن' : cat === 'regenerative' ? 'تجديد' : cat === 'antiaging' ? 'مكافحة الشيخوخة' : 'أدوات بحث';
-      tdCat.innerHTML = `<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs">${catLabel}</span>`;
-      tr.appendChild(tdName); tr.appendChild(tdDesc); tr.appendChild(tdPurity); tr.appendChild(tdCat); tbody.appendChild(tr);
-    });
-  }
-
-  document.querySelectorAll('.filter-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-primary','text-white'); b.classList.add('border','border-gray-300','text-gray-600'); }); btn.classList.add('bg-primary','text-white'); btn.classList.remove('border','border-gray-300','text-gray-600'); currentFilter = btn.dataset.filter; renderTable(); }); });
-  document.getElementById('searchInput').addEventListener('input', e => { currentSearch = e.target.value; renderTable(); });
-  
-  const mobileBtn = document.getElementById('mobileMenuBtn'), mobileMenu = document.getElementById('mobileMenu');
-  mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-  document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
-
-  const i18n = {
-    zh: { nav_products:'产品目录', nav_custom:'定制合成', nav_technology:'技术平台', nav_about:'关于我们', nav_faq:'常见问题', nav_contact:'联系我们', request_quote:'获取报价', catalog_heading:'完整多肽目录', catalog_subheading:'102种研究级多肽 — 纯度均≥99.5%，冻干粉，全球发货。', th_product:'产品名称', th_mechanism:'作用机理与效果', th_purity:'纯度', th_category:'分类', disclaimer:'所有产品仅供研究使用。定制合成和批量订单可询。', footer_about:'自2014年起专业多肽供应商。HPLC验证，discreet 美国发货。', footer_links:'快速链接', footer_categories:'产品分类', footer_contact:'联系我们' },
-    en: { nav_products:'Products', nav_custom:'Custom Synthesis', nav_technology:'Technology', nav_about:'About', nav_faq:'FAQ', nav_contact:'Contact', request_quote:'Request A Quote', catalog_heading:'Complete Peptide Catalog', catalog_subheading:'102 research-grade peptides — all with ≥99.5% purity, lyophilized, and ready to ship worldwide.', th_product:'Product', th_mechanism:'Mechanism & Effects', th_purity:'Purity', th_category:'Category', disclaimer:'All products are for research use only. Custom synthesis and bulk orders available upon request.', footer_about:'Professional peptide supplier since 2014. HPLC verified, discreet USA shipping.', footer_links:'Quick Links', footer_categories:'Categories', footer_contact:'Contact' },
-    ar: { nav_products:'المنتجات', nav_custom:'تخليق مخصص', nav_technology:'التقنية', nav_about:'عنّا', nav_faq:'الأسئلة', nav_contact:'اتصل', request_quote:'طلب عرض سعر', catalog_heading:'كتالوج الببتيدات الكامل', catalog_subheading:'102 ببتيد بدرجة بحثية — جميعها بنقاء ≥99.5%، مجفدة بالتجميد، وشحن عالمي.', th_product:'المنتج', th_mechanism:'آلية العمل والتأثيرات', th_purity:'النقاء', th_category:'الفئة', disclaimer:'جميع المنتجات للاستخدام البحثي فقط. التخليق المخصص والطلبات بالجملة متاحة.', footer_about:'مورد ببتيدات منذ 2014.', footer_links:'روابط سريعة', footer_categories:'الفئات', footer_contact:'اتصل' }
-  };
-
-  function switchLanguage(lang) {
-    currentLang = lang;
-    document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    const trans = i18n[lang] || i18n.en;
-    document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (trans[key]) el.innerHTML = trans[key]; });
-    document.getElementById('langSwitcherDesktop').value = lang;
-    document.getElementById('langSwitcherMobile').va
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
